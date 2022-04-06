@@ -1,5 +1,5 @@
 variable "default_tag" {
-    type = string
-    description = "A default tag to add to everything"
-    default = "terraform_aws_vpc"
+  type        = string
+  description = "A default tag to add to everything"
+  default     = "terraform_aws_vpc"
 }
