@@ -7,3 +7,8 @@ resource "aws_route_table_association" "route-table-b" {
   subnet_id      = aws_subnet.subnet-1b.id
   route_table_id = aws_route_table.route-table.id
 }
+
+resource "aws_route_table_association" "route-table-c" {
+  subnet_id      = aws_subnet.subnet-1c.id
+  route_table_id = aws_route_table.route-table.id
+}
