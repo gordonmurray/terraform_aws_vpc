@@ -1,32 +1,21 @@
-resource "aws_subnet" "subnet-1a" {
-  vpc_id                  = aws_vpc.vpc.id
-  availability_zone       = "eu-west-1a"
-  cidr_block              = "100.10.0.0/20"
-  map_public_ip_on_launch = "true"
+resource "aws_subnet" "public" {
+  count             = length(var.public_subnet_cidrs)
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.public_subnet_cidrs[count.index]
+  availability_zone = element(data.aws_availability_zones.available.names, count.index % length(data.aws_availability_zones.available.names))
 
   tags = {
-    Name = var.default_tag
+    Name = "public-subnet-${count.index}"
   }
 }
 
-resource "aws_subnet" "subnet-1b" {
-  vpc_id                  = aws_vpc.vpc.id
-  availability_zone       = "eu-west-1b"
-  cidr_block              = "100.10.16.0/20"
-  map_public_ip_on_launch = "true"
+resource "aws_subnet" "private" {
+  count             = length(var.private_subnet_cidrs)
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.private_subnet_cidrs[count.index]
+  availability_zone = element(data.aws_availability_zones.available.names, count.index % length(data.aws_availability_zones.available.names))
 
   tags = {
-    Name = var.default_tag
-  }
-}
-
-resource "aws_subnet" "subnet-1c" {
-  vpc_id                  = aws_vpc.vpc.id
-  availability_zone       = "eu-west-1c"
-  cidr_block              = "100.10.32.0/20"
-  map_public_ip_on_launch = "true"
-
-  tags = {
-    Name = var.default_tag
+    Name = "private-subnet-${count.index}"
   }
 }

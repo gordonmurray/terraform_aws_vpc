@@ -1,14 +1,11 @@
-resource "aws_route_table_association" "route-table-a" {
-  subnet_id      = aws_subnet.subnet-1a.id
-  route_table_id = aws_route_table.route-table.id
+resource "aws_route_table_association" "private" {
+  count          = length(var.private_subnet_cidrs)
+  subnet_id      = aws_subnet.private[count.index].id
+  route_table_id = aws_route_table.private.id
 }
 
-resource "aws_route_table_association" "route-table-b" {
-  subnet_id      = aws_subnet.subnet-1b.id
-  route_table_id = aws_route_table.route-table.id
-}
-
-resource "aws_route_table_association" "route-table-c" {
-  subnet_id      = aws_subnet.subnet-1c.id
-  route_table_id = aws_route_table.route-table.id
+resource "aws_route_table_association" "public" {
+  count          = length(var.public_subnet_cidrs)
+  subnet_id      = aws_subnet.public[count.index].id
+  route_table_id = aws_route_table.public.id
 }
