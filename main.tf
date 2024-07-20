@@ -16,6 +16,12 @@ provider "aws" {
   region                   = var.region
   shared_credentials_files = ["~/.aws/credentials"]
   profile                  = "gordonmurray"
+
+  default_tags {
+    tags = {
+      Name = "terraform_aws_vpc"
+    }
+  }
 }
 
 data "aws_availability_zones" "available" {
