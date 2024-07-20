@@ -42,25 +42,36 @@ Public and private subnets are associated with their respective route tables.
 ```
 Project: gordonmurray/terraform_aws_vpc/.
 
- Name                     Monthly Qty  Unit              Monthly Cost
+ Name                                       Monthly Qty  Unit                    Monthly Cost
 
  aws_nat_gateway.main
- ├─ NAT gateway                   730  hours                   $32.85
- └─ Data processed     Monthly cost depends on usage: $0.045 per GB
+ ├─ NAT gateway                                     730  hours                         $32.85
+ └─ Data processed                    Monthly cost depends on usage: $0.045 per GB
 
- OVERALL TOTAL                                                $32.85
+ aws_kms_key.flow_logs
+ ├─ Customer master key                               1  months                         $1.00
+ ├─ Requests                          Monthly cost depends on usage: $0.03 per 10k requests
+ ├─ ECC GenerateDataKeyPair requests  Monthly cost depends on usage: $0.10 per 10k requests
+ └─ RSA GenerateDataKeyPair requests  Monthly cost depends on usage: $0.10 per 10k requests
+
+ aws_cloudwatch_log_group.flow_logs
+ ├─ Data ingested                     Monthly cost depends on usage: $0.50 per GB
+ ├─ Archival Storage                  Monthly cost depends on usage: $0.03 per GB
+ └─ Insights queries data scanned     Monthly cost depends on usage: $0.005 per GB
+
+ OVERALL TOTAL                                                                        $33.85
 
 *Usage costs can be estimated by updating Infracost Cloud settings, see docs for other options.
 
 ──────────────────────────────────
-20 cloud resources were detected:
-∙ 1 was estimated
-∙ 19 were free
+23 cloud resources were detected:
+∙ 3 were estimated
+∙ 20 were free
 
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
 ┃ Project                                            ┃ Baseline cost ┃ Usage cost* ┃ Total cost ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━┫
-┃ main                                               ┃           $33 ┃           - ┃        $33 ┃
+┃ main                                               ┃           $34 ┃           - ┃        $34 ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━┛
 ```
 
